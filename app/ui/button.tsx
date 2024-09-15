@@ -13,10 +13,10 @@ export default function Button(props: ButtonProps) {
     const { onClick, contents, color, size, style } = props;
 
     return <button className={clsx(
-        "flex items-center justify-between text-white",
+        "relative flex items-center justify-between",
         typeof style === "string" && style,
-        color === "primary" && "bg-camsii-black",
-        color === "secondary" && "bg-camsii-blue",
+        color === "primary" && "bg-camsii-black text-white",
+        color === "secondary" && "bg-camsii-blue text-white",
         color !== "primary" && color !== "secondary" && color,
     )}
         style={getButtonStyles(size, style)}
