@@ -17,6 +17,7 @@ const config: Config = {
                 "camsii-black": "#111111",
                 "camsii-gray": "#888888",
                 "camsii-offwhite": "#EEEEEE",
+                "camsii-silver": "#DDDDDD",
                 "camsii-blue": "#005BE2",
                 "camsii-pink": "#AD5F77"
       }

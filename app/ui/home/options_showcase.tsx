@@ -1,12 +1,27 @@
+import shuffle from "@/app/helpers/shuffle";
 import Button from "../button";
 import DiscountTag from "../discount_tag";
 import CustomizeAnim from "./customize_anim";
+import WordRibbon from "./word_ribbon_anim";
+
+const WORDS = ["mr & mrs", "marry me", "new years", "be mine", "bride to be", "class of 2025", "you & me", "sweet 16", "happy bday", "forever", "happy anniversary"];
+const words1 = shuffle(WORDS);
+const words2 = shuffle(WORDS);
+const words3 = shuffle(WORDS);
+const words4 = shuffle(WORDS);
+const WORD_SPACE_PX = 50;
+const FONT_SIZE_PX = 60;
 
 export default function OptionsShowcase() {
     return <div className="flex bg-camsii-offwhite p-[10px] justify-between">
-        <div className="flex-1 flex flex-col items-center justify-between p-[30px] pt-[70px] bg-gradient-to-b from-[#D8A0B1] to-[#986373] h-[625px]">
-            <p className="text-black text-[40px]">Pick from our curated selection</p>
-            <></>
+        <div className="relative flex-1 flex flex-col items-center justify-between p-[30px] pt-[50px] bg-gradient-to-b from-[#D8A0B1] to-[#986373] h-[625px]">
+            <p className="text-black text-[40px] text-center">Pick from our curated selection</p>
+            <div className="absolute top-[200px] flex-col w-full">
+                <WordRibbon words={words1} wordSpacePx={WORD_SPACE_PX} fontSizePx={FONT_SIZE_PX} MsPerPx={20} reversed textStyle="text-camsii-silver" />
+                <WordRibbon words={words2} wordSpacePx={WORD_SPACE_PX} fontSizePx={FONT_SIZE_PX} MsPerPx={40} textStyle="text-camsii-silver" />
+                <WordRibbon words={words3} wordSpacePx={WORD_SPACE_PX} fontSizePx={FONT_SIZE_PX} MsPerPx={20} textStyle="text-camsii-silver" />
+                <WordRibbon words={words4} wordSpacePx={WORD_SPACE_PX} fontSizePx={FONT_SIZE_PX} MsPerPx={10} textStyle="text-camsii-silver" />
+            </div>
             <Button
                 contents={<>
                     Go Tried and True
