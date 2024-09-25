@@ -1,29 +1,31 @@
 import { ReactNode, MouseEvent, CSSProperties } from "react";
 import clsx from "clsx";
+import Link from "next/link";
 
 export type ButtonProps = {
-    onClick?: (e: MouseEvent) => {};
-    contents: ReactNode;
+    href: string;
+    contents: string;
     color: "primary" | "secondary" | string | string[];
     size: number; // text and padding are linearly correlated
     style?: string | CSSProperties; // either tailwind or react inline styles
 };
 
-export default function Button(props: ButtonProps) {
-    const { onClick, contents, color, size, style } = props;
+export default function NavButton(props: ButtonProps) {
+    const { href, contents, color, size, style } = props;
 
-    return <button className={clsx(
-        "relative flex items-center justify-between",
-        typeof style === "string" && style,
-        color === "primary" && "bg-camsii-black text-white",
-        color === "secondary" && "bg-camsii-blue text-white",
-        color !== "primary" && color !== "secondary" && color,
-    )}
+    return <Link
+        href={href}
+        className={clsx(
+            "relative flex items-center justify-between",
+            typeof style === "string" && style,
+            color === "primary" && "bg-camsii-black text-white",
+            color === "secondary" && "bg-camsii-blue text-white",
+            color !== "primary" && color !== "secondary" && color,
+        )}
         style={getButtonStyles(size, style)}
-        onClick={onClick}
     >
         {contents}
-    </button>
+    </Link>
 }
 
 function getButtonStyles(size: number, override?: string | CSSProperties): CSSProperties {
