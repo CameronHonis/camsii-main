@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export type ButtonProps = {
     href: string;
-    contents: string;
+    contents: ReactNode;
     color: "primary" | "secondary" | string | string[];
     size: number; // text and padding are linearly correlated
     style?: string | CSSProperties; // either tailwind or react inline styles
