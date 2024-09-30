@@ -1,6 +1,7 @@
 import { ReactNode, MouseEvent, CSSProperties } from "react";
 import clsx from "clsx";
 
+// TODO: parse contents using props.children default prop
 export default function Button(props: {
     onClick?: (e: MouseEvent) => void,
     contents: ReactNode;
@@ -42,10 +43,3 @@ function getButtonStyles(size: number, override?: string | CSSProperties): CSSPr
         ...override,
     };
 }
-
-// export function textFromButtonEventTarg(eTarg: EventTarget): string | null {
-//     if (!("childNodes" in eTarg)) return null;
-//     if (!Array.isArray(eTarg.childNodes)) return null;
-    
-//     eTarg.childNodes
-// }
