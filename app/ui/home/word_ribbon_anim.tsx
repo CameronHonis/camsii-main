@@ -1,6 +1,6 @@
 "use client"
 
-import pTagWidth from "@/app/helpers/p_tag_width";
+import textWidth from "@/app/helpers/text_width";
 import clsx from "clsx";
 import React from "react";
 
@@ -30,7 +30,7 @@ export default function WordRibbon(props: Props) {
                 wordRef.style.left = `${accWidth}px`;
             }
             const word = words[i];
-            const wordWidth = pTagWidth(word, wordRef);
+            const wordWidth = textWidth(word, wordRef);
             accWidth += wordWidth + wordSpacePx;
         }
 
@@ -42,7 +42,7 @@ export default function WordRibbon(props: Props) {
                 const { left: absLeft, right: absRight } = wordRef.getBoundingClientRect();
                 const relLeft = absLeft - parLeft;
                 const relRight = parRight - absRight;
-                const wordWidth = pTagWidth(wordRef.textContent || "", wordRef);
+                const wordWidth = textWidth(wordRef.textContent || "", wordRef);
 
                 if (reversed) {
                     let nextRelRight = relRight - 1;
