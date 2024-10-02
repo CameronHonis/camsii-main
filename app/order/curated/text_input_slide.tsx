@@ -40,29 +40,27 @@ export default function TextInputSlide(props: {
         props.dispatch(new OrderBuilderSubmitText(inputText));
     }, []);
 
-    return <div>
-        <div className="flex flex-col items-center">
-            <p className="text-camsii-black">{props.prompt}</p>
-            <form onSubmit={onSubmit}>
-                <div className="relative flex py-[10px] pr-[100px] cursor-text" onClick={onTextAreaClick}>
-                    <p className="text-camsii-black">{">"}</p>
-                    <FlexyInput
-                        onNewText={onNewText}
-                        reff={inputRef}
-                        onFocus={(e) => setInputFocused(true)}
-                        onBlur={(e) => setInputFocused(false)}
-                        className="bg-transparent border-none outline-none caret-transparent text-camsii-black"
-                        focusOnRender
-                    />
-                    <div
-                        ref={caretRef}
-                        className={clsx(
-                            "bg-camsii-black w-[8px] h=[1ch]",
-                            (!inputFocused || cursorBlinkHidden) && "hidden",
-                        )}></div>
-                </div>
-                <Button contents="Enter" color="primary" size={30} />
-            </form>
-        </div>
+    return <div className="flex flex-col items-center w-screen">
+        <p className="text-[50px]">{props.prompt}</p>
+        <form onSubmit={onSubmit} className="flex flex-col items-center">
+            <div className="relative flex py-[10px] px-[100px] cursor-text" onClick={onTextAreaClick}>
+                <p className="text-[30px]">{">"}</p>
+                <FlexyInput
+                    onNewText={onNewText}
+                    reff={inputRef}
+                    onFocus={(e) => setInputFocused(true)}
+                    onBlur={(e) => setInputFocused(false)}
+                    className="bg-transparent border-none outline-none caret-transparent text-[30px]"
+                    focusOnRender
+                />
+                <div
+                    ref={caretRef}
+                    className={clsx(
+                        "bg-camsii-black w-[8px] h=[1ch]",
+                        (!inputFocused || cursorBlinkHidden) && "hidden",
+                    )}></div>
+            </div>
+            { inputText && <Button contents="Enter" color="primary" size={30} /> }
+        </form>
     </div>
 }

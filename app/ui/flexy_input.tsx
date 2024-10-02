@@ -1,4 +1,5 @@
 import React from "react";
+import textWidth from "../helpers/text_width";
 
 function resize(input: HTMLInputElement) {
     const tmp = document.createElement("div");
@@ -40,8 +41,10 @@ export default function FlexyInput(props: {
         const nextVal = props.filter ? props.filter(e.target.value) : e.target.value;
         setText(nextVal);
         props.onNewText(nextVal);
-        if (ref.current)
-            resize(ref.current);
+        if (ref.current) {
+            const w = textWidth(ref.current);
+            ref.current.style.width = `${w}px`;
+        }
     }, [ref]);
 
     return <input

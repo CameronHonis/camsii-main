@@ -30,7 +30,7 @@ export default function WordRibbon(props: Props) {
                 wordRef.style.left = `${accWidth}px`;
             }
             const word = words[i];
-            const wordWidth = textWidth(word, wordRef);
+            const wordWidth = textWidth(wordRef);
             accWidth += wordWidth + wordSpacePx;
         }
 
@@ -42,7 +42,7 @@ export default function WordRibbon(props: Props) {
                 const { left: absLeft, right: absRight } = wordRef.getBoundingClientRect();
                 const relLeft = absLeft - parLeft;
                 const relRight = parRight - absRight;
-                const wordWidth = textWidth(wordRef.textContent || "", wordRef);
+                const wordWidth = textWidth(wordRef);
 
                 if (reversed) {
                     let nextRelRight = relRight - 1;
