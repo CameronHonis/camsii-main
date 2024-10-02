@@ -13,3 +13,5 @@ export const VARIANTS_BY_PHRASE = {
 export const PROMPT_BY_PLACEHOLDER = {
     "last name": "What is the last name you want to display?",
 };
+
+export const CURSOR_BLINK_MS = 750;

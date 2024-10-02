@@ -1,22 +1,21 @@
 "use client";
 
 import { useTypewriter } from "@/app/hooks/use_typewriter";
+import { PHRASES, CURSOR_BLINK_MS } from "@/constants";
 import clsx from "clsx";
 import React from "react";
 
 const WORD_DURATION_MS = 3000;
 const NEXT_CHAR_MS = 100;
-const CURSOR_BLINK_MS = 750;
-const WORDS = ["yeehaw yall", "howdy partner", "god bless texas", "happy anniversary", "happy new years", "happier than ever"];
 
 function getNextWord(prev: string): string {
-    const currIdx = WORDS.findIndex(word => word === prev);
-    const nextIdx = (currIdx + 1) % WORDS.length;
-    return WORDS[nextIdx];
+    const currIdx = PHRASES.findIndex(word => word === prev);
+    const nextIdx = (currIdx + 1) % PHRASES.length;
+    return PHRASES[nextIdx];
 }
 
 export default function CustomizeAnim() {
-    const [display, targ, setTarg] = useTypewriter("", WORDS[0], NEXT_CHAR_MS);
+    const [display, targ, setTarg] = useTypewriter("", PHRASES[0], NEXT_CHAR_MS);
     const [isCursorVisible, setIsCursorVisible] = React.useState(true);
 
     React.useEffect(() => {

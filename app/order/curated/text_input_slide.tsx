@@ -1,15 +1,38 @@
 import React from "react";
 import { OrderBuilderAction, OrderBuilderSubmitText } from "./order_builder_actions";
 import Button from "@/app/ui/button";
+import clsx from "clsx";
+import FlexyInput from "@/app/ui/flexy_input";
+import { CURSOR_BLINK_MS } from "@/constants";
 
 export default function TextInputSlide(props: {
     prompt: string,
     dispatch: React.Dispatch<OrderBuilderAction>,
 }) {
     const [inputText, setInputText] = React.useState("");
+    const [inputFocused, setInputFocused] = React.useState(false);
+    const [cursorBlinkHidden, setCursorBlinkHidden] = React.useState(false);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const caretRef = React.useRef<HTMLDivElement>(null);
 
-    const onInputChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputText(e.target.value);
+    React.useEffect(() => {
+        let _cursorBlinkHidden = false;
+        setCursorBlinkHidden(false);
+        const intervalId = setInterval(() => {
+            _cursorBlinkHidden = !_cursorBlinkHidden;
+            setCursorBlinkHidden(_cursorBlinkHidden);
+        }, CURSOR_BLINK_MS);
+
+        return () => clearInterval(intervalId);
+    }, [inputText]);
+
+    const onTextAreaClick = React.useCallback(() => {
+        if (!inputRef.current) return;
+        inputRef.current.focus();
+    }, []);
+
+    const onNewText = React.useCallback((newText: string) => {
+        setInputText(newText);
     }, []);
 
     const onSubmit = React.useCallback((e: React.FormEvent) => {
@@ -18,19 +41,25 @@ export default function TextInputSlide(props: {
     }, []);
 
     return <div>
-        <div>
-            <p>{props.prompt}</p>
+        <div className="flex flex-col items-center">
+            <p className="text-camsii-black">{props.prompt}</p>
             <form onSubmit={onSubmit}>
-                <div className="flex">
-                    <p>{">"}</p>
-                    <div></div>
-                    <input
-                        className="text-black"
-                        type="text"
-                        placeholder="Start Typing"
-                        onChange={onInputChange}
-                        value={inputText}
-                    ></input>
+                <div className="relative flex py-[10px] pr-[100px] cursor-text" onClick={onTextAreaClick}>
+                    <p className="text-camsii-black">{">"}</p>
+                    <FlexyInput
+                        onNewText={onNewText}
+                        reff={inputRef}
+                        onFocus={(e) => setInputFocused(true)}
+                        onBlur={(e) => setInputFocused(false)}
+                        className="bg-transparent border-none outline-none caret-transparent text-camsii-black"
+                        focusOnRender
+                    />
+                    <div
+                        ref={caretRef}
+                        className={clsx(
+                            "bg-camsii-black w-[8px] h=[1ch]",
+                            (!inputFocused || cursorBlinkHidden) && "hidden",
+                        )}></div>
                 </div>
                 <Button contents="Enter" color="primary" size={30} />
             </form>
