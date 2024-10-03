@@ -7,7 +7,7 @@ import { CURSOR_BLINK_MS, WINDOW_SLIDE_MS } from "@/constants";
 import textWidth from "@/app/helpers/text_width";
 import { hasSpecialCharacters } from "@/app/helpers/hasSpecialCharacters";
 
-function errorsFromInput(input: string): string[] {
+function getErrorsFromInput(input: string): string[] {
     const rtn = [];
     if (hasSpecialCharacters(input)) {
         rtn.push("no special characters allowed");
@@ -37,23 +37,41 @@ export default function TextInputSlide(props: {
 
     // input error feedback
     React.useEffect(() => {
-        const baseErrors = errorsFromInput(inputText);
+        const baseErrors = getErrorsFromInput(inputText);
         if (props.inputRules)
             baseErrors.concat(props.inputRules(inputText));
-        setInputErrors(errorsFromInput(inputText));
+        setInputErrors(getErrorsFromInput(inputText));
     }, [inputText]);
 
     // selection change
     React.useEffect(() => {
+        if (!inputRef.current) return;
+
+        let _selRange: [number, number] = [0, 0];
         const onSelectionChange = () => {
             if (inputRef.current && document.activeElement === inputRef.current) {
                 const { selectionStart, selectionEnd } = inputRef.current;
-                setSelRange([selectionStart || 0, selectionEnd || 0]);
+                _selRange = [selectionStart || 0, selectionEnd || 0];
+                setSelRange(_selRange);
+            }
+        }
+
+        // compensate for the lack of `selectionchange` event dispatch on backspace deleting text (why javascript??)
+        const onKeydown = (e: KeyboardEvent) => {
+            if (e.key === "Backspace") {
+                console.log("backspace");
+                const caretPos = Math.max(0, _selRange[0] === _selRange[1] ? _selRange[0] - 1 : _selRange[0]);
+                _selRange = [caretPos, caretPos];
+                setSelRange(_selRange);
             }
         }
         document.addEventListener("selectionchange", onSelectionChange);
+        inputRef.current.addEventListener("keydown", onKeydown);
 
-        return () => document.removeEventListener("selectionchange", onSelectionChange);
+        return () => {
+            document.removeEventListener("selectionchange", onSelectionChange);
+            inputRef.current?.removeEventListener("keydown", onKeydown);
+        }
     }, [inputRef]);
 
     // style caret
