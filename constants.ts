@@ -14,4 +14,5 @@ export const PROMPT_BY_PLACEHOLDER = {
     "last name": "What is the last name you want to display?",
 };
 
-export const CURSOR_BLINK_MS = 750;
+export const CURSOR_BLINK_MS = 600;
+export const WINDOW_SLIDE_MS = 500;

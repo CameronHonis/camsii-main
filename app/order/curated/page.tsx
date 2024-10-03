@@ -35,8 +35,8 @@ export default function CuratedPage(props: {
 
     const slideIdx = state.slideStack.length - 1;
 
-    return <div>
-        <WindowSlide eleIdx={slideIdx} className="w-[500px] h-[500px]">
+    return <>
+        <WindowSlide eleIdx={slideIdx} className="flex-grow w-full pt-[135px] text-camsii-black">
             {
                 state.slideStack.map((slide, idx) => {
                     if (slide instanceof OrderBuilderOptionsSlide) {
@@ -49,9 +49,11 @@ export default function CuratedPage(props: {
                 })
             }
         </WindowSlide>
-        <div className="cursor-pointer" onClick={onBack}>
-            <Image src="" alt="" width={0} height={0} />
-            <p>{prevSlideName}</p>
+        <div className="w-[1000px] mb-[100px]">
+            <div className="flex flex-col items-center w-[100px] cursor-pointer" onClick={onBack}>
+                <Image src="/back_arrow.png" alt="back arrow" width={48} height={36} />
+                <p>{prevSlideName}</p>
+            </div>
         </div>
-    </div>
+    </>
 }

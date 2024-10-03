@@ -12,7 +12,7 @@ export default function Button(props: {
     const { onClick, contents, color, size, style } = props;
 
     return <button className={clsx(
-        "relative flex items-center justify-between",
+        "relative flex items-center justify-between shadow-[0_4px_4px_rgba(0,0,0,0.25)]",
         typeof style === "string" && style,
         color === "primary" && "bg-camsii-black text-white",
         color === "secondary" && "bg-camsii-blue text-white",

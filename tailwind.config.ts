@@ -20,7 +20,7 @@ const config: Config = {
                 "camsii-silver": "#DDDDDD",
                 "camsii-blue": "#005BE2",
                 "camsii-pink": "#AD5F77"
-      }
+            }
         },
     },
     plugins: [],

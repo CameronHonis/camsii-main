@@ -22,6 +22,7 @@ export default function FlexyInput(props: {
     reff?: React.RefObject<HTMLInputElement>;
     placeholder?: string;
     focusOnRender?: boolean;
+    minWidthPx?: number;
     onFocus?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
     onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
     filter?: (input: string) => string;
@@ -29,22 +30,25 @@ export default function FlexyInput(props: {
     const [text, setText] = React.useState("");
     const ref = props.reff || React.useRef<HTMLInputElement>(null);
 
-    React.useEffect(() => {
+    const resize = React.useCallback(() => {
         if (!ref.current) return;
-        ref.current.style.width = "0";
-        if (props.focusOnRender) {
+        const minWidthPx = props.minWidthPx || 0;
+        const widthPx = Math.max(textWidth(ref.current), minWidthPx);
+        ref.current.style.width = `${widthPx}px`;
+    }, []);
+
+    React.useEffect(() => {
+        if (ref.current && props.focusOnRender) {
             ref.current.focus();
         }
+        resize();
     }, [ref]);
 
     const onInputChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const nextVal = props.filter ? props.filter(e.target.value) : e.target.value;
         setText(nextVal);
         props.onNewText(nextVal);
-        if (ref.current) {
-            const w = textWidth(ref.current);
-            ref.current.style.width = `${w}px`;
-        }
+        resize();
     }, [ref]);
 
     return <input
