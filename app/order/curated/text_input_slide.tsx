@@ -136,14 +136,14 @@ export default function TextInputSlide(props: {
             </div>
             {inputText && inputErrors.length === 0 && <Button contents="Enter" color="primary" size={30} style="mt-[25px]" />}
             {
-                inputErrors.length > 0 && <div>
+                inputText && inputErrors.length > 0 && <div>
                     {
                         inputErrors.map((err, idx) =>
                             <p
                                 className="text-[20px]"
                                 key={idx}
                             >
-                                {err}
+                                - {err}
                             </p>)
                     }
 
