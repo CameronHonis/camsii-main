@@ -32,6 +32,7 @@ function cloneAsPTag(ele: HTMLElement): HTMLParagraphElement {
     p.style.fontFamily = styles.fontFamily;
     p.style.fontWeight = styles.fontWeight;
     p.style.letterSpacing = styles.letterSpacing;
+    p.style.textTransform = styles.textTransform;
 
     return p;
 }
