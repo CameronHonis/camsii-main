@@ -13,6 +13,7 @@ const words4 = shuffle(WORDS);
 const WORD_SPACE_PX = 50;
 const FONT_SIZE_PX = 60;
 
+// Fix WordRibbon word spacing (prob broke `textWidth`)
 export default function OptionsShowcase() {
     return <div className="flex bg-camsii-offwhite p-[10px] justify-between">
         <div className="relative flex-1 flex flex-col items-center justify-between p-[30px] pt-[50px] bg-gradient-to-b from-[#D8A0B1] to-[#986373] h-[625px]">
