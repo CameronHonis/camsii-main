@@ -1,21 +1,20 @@
-"use client";
-
-import React from "react";
-import { CartItem } from "@/models/cart_item";
+"use client"
 import WindowSlide from "@/app/ui/window_slide";
+import { CartItem } from "@/models/cart_item";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import React from "react";
 import OptionsSlide from "../options_slide";
 import { OrderBuilderBack } from "../order_builder_actions";
 import { OrderBuilderOptionsSlide, OrderBuilderTextInputSlide, OrderBuilderSizerSlide } from "../order_builder_slide";
 import OrderBuilderState, { orderBuilderStateReducer, OrderBuilderPhases } from "../order_builder_state";
 import SizeSlide from "../size_slide";
 import TextInputSlide from "../text_input_slide";
+import { useRouter } from "next/navigation";
 
-export default function CuratedOrderPage(props: {
+export default function CustomOrderPage(props: {
     addCartItem: React.Dispatch<React.SetStateAction<CartItem>>;
 }) {
-    const [state, dispatch] = React.useReducer(orderBuilderStateReducer, OrderBuilderState.new(true));
+    const [state, dispatch] = React.useReducer(orderBuilderStateReducer, OrderBuilderState.new(false));
     const router = useRouter();
 
     const onBack = React.useCallback(() => {
@@ -52,7 +51,7 @@ export default function CuratedOrderPage(props: {
                     } else if (slide instanceof OrderBuilderTextInputSlide) {
                         return <TextInputSlide prompt={slide.prompt} dispatch={dispatch} key={idx} />;
                     } else if (slide instanceof OrderBuilderSizerSlide) {
-                        return <SizeSlide words={state.getCartWords()} onSelect={() => {}} key={idx} />;
+                        return <SizeSlide words={state.getCartWords()} onSelect={() => { }} key={idx} />;
                     }
                 })
             }
