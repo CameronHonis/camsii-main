@@ -21,6 +21,7 @@ export default function CuratedPage(props: {
     const onBack = React.useCallback(() => {
         if (state.getPhase() === OrderBuilderPhases.BASE_PHRASE) {
             router.push("/order");
+            return;
         }
         dispatch(new OrderBuilderBack());
     }, [state]);
