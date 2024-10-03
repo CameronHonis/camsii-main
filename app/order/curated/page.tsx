@@ -9,17 +9,17 @@ import { OrderBuilderBack } from "./order_builder_actions";
 import { OrderBuilderOptionsSlide, OrderBuilderSizerSlide, OrderBuilderTextInputSlide } from "./order_builder_slide";
 import OptionsSlide from "./options_slide";
 import TextInputSlide from "./text_input_slide";
+import { useRouter } from "next/navigation";
 
 export default function CuratedPage(props: {
     addCartItem: React.Dispatch<React.SetStateAction<CartItem>>;
 }) {
     const [state, dispatch] = React.useReducer(orderBuilderStateReducer, OrderBuilderState.new(true));
+    const router = useRouter();
 
     const onBack = React.useCallback(() => {
         if (state.getPhase() === OrderBuilderPhases.BASE_PHRASE) {
-            // reroute to /order
-            console.log("implement reroute to /order");
-            return;
+            router.push("/order");
         }
         dispatch(new OrderBuilderBack());
     }, [state]);
