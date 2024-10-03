@@ -123,8 +123,9 @@ export default function TextInputSlide(props: {
                     reff={inputRef}
                     onFocus={(e) => setInputFocused(true)}
                     onBlur={(e) => setInputFocused(false)}
-                    className="bg-transparent border-none outline-none text-[40px] caret-transparent font-bold"
-                    minWidthPx={200}
+                    placeholder={"\u00A0\u00A0Start Typing"}
+                    className="bg-transparent border-none outline-none text-[40px] caret-transparent font-bold placeholder-camsii-dark-pink"
+                    minWidthPx={280}
                 />
                 <p
                     ref={caretRef}
