@@ -6,7 +6,7 @@ export default function Order() {
         <p className="text-black text-[60px]">Choose your style</p>
         <div className="flex justify-between w-full mt-[200px]">
             <div className="flex flex-col items-center max-w-[420px] mx-[75px]">
-                <p className="text-black text-[25px] text-center">Choose from a curated list of popular words and phrases</p>
+                <p className="text-black text-[25px] text-center">Choose from a curated list of popular word combos</p>
                 <NavButton
                     href="/order/curated"
                     contents={<>
@@ -19,7 +19,7 @@ export default function Order() {
                 />
             </div>
             <div className="flex flex-col items-center max-w-[420px] mx-[75px]">
-                <p className="text-black text-[25px] text-center">Customize the size and shape of the letters you want, how you want</p>
+                <p className="text-black text-[25px] text-center">Customize the size and shape of your order</p>
                 <NavButton
                     href="/order/custom"
                     contents={<>
