@@ -1,3 +1,4 @@
+// TODO: test and fix me
 export default function shuffle<T>(list: T[]): T[] {
     const rtn = [...list];
     for (let i = 0; i < rtn.length; i++) {

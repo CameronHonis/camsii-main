@@ -10,6 +10,7 @@ import { OrderBuilderOptionsSlide, OrderBuilderSizerSlide, OrderBuilderTextInput
 import OptionsSlide from "./options_slide";
 import TextInputSlide from "./text_input_slide";
 import { useRouter } from "next/navigation";
+import SizeSlide from "./size_slide";
 
 export default function CuratedPage(props: {
     addCartItem: React.Dispatch<React.SetStateAction<CartItem>>;
@@ -22,6 +23,12 @@ export default function CuratedPage(props: {
             router.push("/order");
         }
         dispatch(new OrderBuilderBack());
+    }, [state]);
+
+    React.useEffect(() => {
+        if (state.getPhase() === OrderBuilderPhases.SIZES) {
+            router.push("/cart");
+        }
     }, [state]);
 
 
@@ -44,7 +51,7 @@ export default function CuratedPage(props: {
                     } else if (slide instanceof OrderBuilderTextInputSlide) {
                         return <TextInputSlide prompt={slide.prompt} dispatch={dispatch} key={idx} />;
                     } else if (slide instanceof OrderBuilderSizerSlide) {
-                        return <div key={idx}>implement me</div>;
+                        return <SizeSlide words={state.getCartWords()} onSelect={() => {}} key={idx} />;
                     }
                 })
             }

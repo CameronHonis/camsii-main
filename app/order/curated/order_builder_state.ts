@@ -1,7 +1,8 @@
 import { OrderBuilderAction, OrderBuilderBack, OrderBuilderSelectOption, OrderBuilderSelectSizes, OrderBuilderSubmitText } from "./order_builder_actions";
 import { PHRASES, PROMPT_BY_PLACEHOLDER, VARIANTS_BY_PHRASE } from "@/constants";
 import { OrderBuilderOptionsSlide, OrderBuilderSizerSlide, OrderBuilderSlide, OrderBuilderTextInputSlide } from "./order_builder_slide";
-import { LetterSize } from "@/models/letter_size";
+import { LetterSize, LetterSizes } from "@/models/letter_size";
+import CartWord from "@/models/cart_word";
 
 export const OrderBuilderPhases = {
     BASE_PHRASE: "base_phrase",
@@ -122,6 +123,20 @@ export default class OrderBuilderState {
     public getPrevSlideName(): string {
         if (this.slideStack.length < 2) throw new Error("could not get prev slide name, prev slide does not exist");
         return this.slideStack[this.slideStack.length-2].name;
+    }
+
+    // TODO: remove default 4ft once sizer slide is implemented
+    public getCartWords(): CartWord[] {
+        const words = this.getPhrase().split(" ");
+        return words.map(word => {
+            if (!this.sizeByWord)
+                return new CartWord(word, LetterSizes.FOUR_FT);
+                // throw new Error("cannot get cart words, sizes have not been set");
+            if (!(word in this.sizeByWord))
+                return new CartWord(word, LetterSizes.FOUR_FT);
+                // throw new Error(`cannot get size for word ${word}`);
+            return new CartWord(word, this.sizeByWord![word]);
+        });
     }
 
     public static new(isCurated: boolean): OrderBuilderState {
