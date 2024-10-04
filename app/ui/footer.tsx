@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
-    return <div className="flex justify-center gap-[600px] py-[40px]">
+    return <div className="flex justify-center gap-[600px] py-[40px] bg-camsii-black">
         <div className="flex flex-col items-end justify-between h-[160px]">
             <p className="font-bold text-[30px]">Social Media</p>
             <div className="flex gap-[25px]">

@@ -142,14 +142,14 @@ export default function TextInputSlide(props: {
                     onFocus={(e) => setInputFocused(true)}
                     onBlur={(e) => setInputFocused(false)}
                     placeholder={"\u00A0\u00A0Start Typing"}
-                    className="bg-transparent border-none outline-none text-[40px] caret-transparent font-bold placeholder-camsii-dark-pink"
+                    className="bg-transparent border-none outline-none text-[40px] caret-transparent font-bold placeholder-camsii-dark-pink uppercase placeholder:normal-case"
                     minWidthPx={280}
                 />
                 <p
                     ref={caretRef}
                     id="caret"
                     className={clsx(
-                        "absolute bg-camsii-black text-white text-[40px] pointer-events-none whitespace-pre-wrap font-bold",
+                        "absolute bg-camsii-black text-white text-[40px] pointer-events-none whitespace-pre-wrap font-bold uppercase",
                         (!inputFocused || caretBlinkHidden) && "hidden",
                     )}>{selText}</p>
             </div>
