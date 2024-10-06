@@ -1,8 +1,8 @@
 import { OrderBuilderAction, OrderBuilderBack, OrderBuilderSelectOption, OrderBuilderSelectSizes, OrderBuilderSubmitText } from "./order_builder_actions";
 import { PHRASES, PROMPT_BY_PLACEHOLDER, VARIANTS_BY_PHRASE } from "@/constants";
 import { OrderBuilderOptionsSlide, OrderBuilderSizerSlide, OrderBuilderSlide, OrderBuilderTextInputSlide } from "./order_builder_slide";
-import { LetterSize, LetterSizes } from "@/models/letter_size";
-import CartWord from "@/models/cart_word";
+import { LetterSize, LetterSizes } from "@/app/models/letter_size";
+import CartWord from "@/app/models/cart_word";
 
 export const OrderBuilderPhases = {
     BASE_PHRASE: "base_phrase",

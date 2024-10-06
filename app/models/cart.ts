@@ -1,11 +1,14 @@
 import { LetterSize, LetterSizes } from "./letter_size";
 import CartWord from "./cart_word";
+import Delivery from "./delivery";
 
-export class CartItem {
+export default class Cart {
     words: CartWord[];
+    delivery: Delivery;
 
-    constructor(words: CartWord[]) {
+    constructor(words: CartWord[], delivery: Delivery) {
         this.words = words;
+        this.delivery = delivery;
     }
 
     public setPhrase(phrase: string, size: LetterSize = LetterSizes.ZERO) {
@@ -17,12 +20,16 @@ export class CartItem {
         this.words.forEach(word => word.size = size);
     }
 
-    public clone(): CartItem {
-        const wordsClone = this.words.map(word => word.clone());
-        return new CartItem(wordsClone);
+    public hasDeliveryInfo(): boolean {
+        return !this.delivery.isNull();
     }
 
-    public static null(): CartItem {
-        return new CartItem([]);
+    public clone(): Cart {
+        const wordsClone = this.words.map(word => word.clone());
+        return new Cart(wordsClone, this.delivery.clone());
+    }
+
+    public static null(): Cart {
+        return new Cart([], Delivery.null());
     }
 }

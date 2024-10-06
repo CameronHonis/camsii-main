@@ -1,4 +1,4 @@
-import { LetterSize } from "@/models/letter_size";
+import { LetterSize } from "@/app/models/letter_size";
 
 export type OrderBuilderAction = OrderBuilderSelectOption | OrderBuilderSubmitText | OrderBuilderSelectSizes | OrderBuilderBack;
 

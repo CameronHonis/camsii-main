@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CartItem } from "@/models/cart_item";
+import { Cart } from "@/models/cart_item";
 import WindowSlide from "@/app/ui/window_slide";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ import SizeSlide from "../size_slide";
 import TextInputSlide from "../text_input_slide";
 
 export default function CuratedOrderPage(props: {
-    addCartItem: React.Dispatch<React.SetStateAction<CartItem>>;
+    addCartItem: React.Dispatch<React.SetStateAction<Cart>>;
 }) {
     const [state, dispatch] = React.useReducer(orderBuilderStateReducer, OrderBuilderState.new(true));
     const router = useRouter();

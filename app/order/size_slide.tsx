@@ -1,4 +1,4 @@
-import CartWord from "@/models/cart_word";
+import CartWord from "@/app/models/cart_word";
 import React from "react";
 
 type Props = {

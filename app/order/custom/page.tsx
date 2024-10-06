@@ -1,6 +1,5 @@
 "use client"
 import WindowSlide from "@/app/ui/window_slide";
-import { CartItem } from "@/models/cart_item";
 import Image from "next/image";
 import React from "react";
 import OptionsSlide from "../options_slide";
@@ -10,9 +9,10 @@ import OrderBuilderState, { orderBuilderStateReducer, OrderBuilderPhases } from 
 import SizeSlide from "../size_slide";
 import TextInputSlide from "../text_input_slide";
 import { useRouter } from "next/navigation";
+import CartWord from "@/app/models/cart_word";
 
 export default function CustomOrderPage(props: {
-    addCartItem: React.Dispatch<React.SetStateAction<CartItem>>;
+    addCartWord: React.Dispatch<React.SetStateAction<CartWord>>;
 }) {
     const [state, dispatch] = React.useReducer(orderBuilderStateReducer, OrderBuilderState.new(false));
     const router = useRouter();
