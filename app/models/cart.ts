@@ -1,6 +1,7 @@
 import { LetterSize, LetterSizes } from "./letter_size";
-import CartWord from "./cart_word";
-import Delivery from "./delivery";
+import CartWord, { CartWordSchema } from "./cart_word";
+import Delivery, { DeliverySchema } from "./delivery";
+import { z } from "zod";
 
 export default class Cart {
     words: CartWord[];
@@ -32,4 +33,25 @@ export default class Cart {
     public static null(): Cart {
         return new Cart([], Delivery.null());
     }
+
+    public static fromJson(json: Object): Promise<Cart> {
+        return new Promise((resolve, reject) => {
+            try {
+                const validJson = CartSchema.parse(json);
+                const cartWordProms = validJson.words.map(CartWord.fromJson);
+                const deliveryProm = Delivery.fromJson(validJson.delivery);
+                Promise.all([deliveryProm, ...cartWordProms]).then((results) => {
+                    const [delivery, ...cartWords] = results;
+                    resolve(new Cart(cartWords, delivery));
+                }).catch(err => { throw err });
+            } catch (err) {
+                reject(new Error(`cannot build, got ${err}`));
+            }
+        });
+    }
 }
+
+export const CartSchema = z.object({
+    words: z.array(CartWordSchema),
+    delivery: DeliverySchema,
+});

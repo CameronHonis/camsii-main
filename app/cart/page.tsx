@@ -1,6 +1,6 @@
-import Cart from "@/models/cart";
 import React from "react";
 import Button from "../ui/button";
+import Cart from "../models/cart";
 
 export default function CartPage() {
     const [cart, setCart] = React.useState<Cart>();
@@ -25,7 +25,7 @@ export default function CartPage() {
                 <p>Delivery</p>
             </div>
             <div>
-                
+
             </div>
         </div>
     </div>

@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export default class Delivery {
     recvAddress: string;
     dropoffDatetime: Date;
@@ -42,4 +44,31 @@ export default class Delivery {
     public static null(): Delivery {
         return new Delivery("", new Date(0), new Date(0), false, 0, false);
     }
+
+    public static fromJson(json: Object): Promise<Delivery> {
+        return new Promise((resolve, reject) => {
+            try {
+                const validJson = DeliverySchema.parse(json);
+                resolve(new Delivery(
+                    validJson.recvAddress,
+                    new Date(validJson.dropoffDatetime),
+                    new Date(validJson.pickupDatetime),
+                    validJson.isIndoor,
+                    validJson.extCordFt,
+                    validJson.needGenerator
+                ));
+            } catch (err) {
+                reject(`could not build Delivery from:\n${json}`);
+            }
+        });
+    }
 }
+
+export const DeliverySchema = z.object({
+    recvAddress: z.string(),
+    dropoffDatetime: z.string(),
+    pickupDatetime: z.string(),
+    isIndoor: z.boolean(),
+    extCordFt: z.number(),
+    needGenerator: z.boolean(),
+});
