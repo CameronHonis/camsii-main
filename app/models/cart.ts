@@ -34,20 +34,12 @@ export default class Cart {
         return new Cart([], Delivery.null());
     }
 
-    public static fromJson(json: Object): Promise<Cart> {
-        return new Promise((resolve, reject) => {
-            try {
-                const validJson = CartSchema.parse(json);
-                const cartWordProms = validJson.words.map(CartWord.fromJson);
-                const deliveryProm = Delivery.fromJson(validJson.delivery);
-                Promise.all([deliveryProm, ...cartWordProms]).then((results) => {
-                    const [delivery, ...cartWords] = results;
-                    resolve(new Cart(cartWords, delivery));
-                }).catch(err => { throw err });
-            } catch (err) {
-                reject(new Error(`cannot build, got ${err}`));
-            }
-        });
+    public static fromJson(json: Object): Cart {
+        const validJson = CartSchema.parse(json);
+        return new Cart(
+            validJson.words.map(CartWord.fromJson),
+            Delivery.fromJson(validJson.delivery)
+        );
     }
 }
 

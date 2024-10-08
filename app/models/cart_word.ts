@@ -14,11 +14,9 @@ export default class CartWord {
         return new CartWord(this.content, this.size);
     }
 
-    public static fromJson(json: Object): Promise<CartWord> {
-        return new Promise((resolve, reject) => {
-            const validJson = CartWordSchema.parse(json);
-            resolve(new CartWord(validJson.content, validJson.size));
-        });
+    public static fromJson(json: Object): CartWord {
+        const validJson = CartWordSchema.parse(json);
+        return new CartWord(validJson.content, validJson.size);
     }
 }
 

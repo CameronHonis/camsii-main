@@ -5,7 +5,7 @@ import { LetterSizes } from "./letter_size";
 
 describe("Cart", () => {
     describe("fromJson", () => {
-        it("parses valid json obj", async () => {
+        it("parses valid json obj", () => {
             const cartWords = [
                 new CartWord("first phrase", LetterSizes.FOUR_FT),
                 new CartWord("second", LetterSizes.ZERO),
@@ -19,8 +19,12 @@ describe("Cart", () => {
             );
             const cart = new Cart(cartWords, delivery);
             const cartJson = JSON.parse(JSON.stringify(cart));
-            const parsedCart = await Cart.fromJson(cartJson);
+            const parsedCart = Cart.fromJson(cartJson);
             expect(parsedCart).toEqual(cart);
+        });
+        it("fails with invalid json", () => {
+            const invalidJson = {invalidField: ""};
+            expect(() => Cart.fromJson(invalidJson)).toThrow();
         });
     });
 });
