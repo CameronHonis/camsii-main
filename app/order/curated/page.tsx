@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Cart } from "@/models/cart_item";
 import WindowSlide from "@/app/ui/window_slide";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,7 @@ import { OrderBuilderOptionsSlide, OrderBuilderTextInputSlide, OrderBuilderSizer
 import OrderBuilderState, { orderBuilderStateReducer, OrderBuilderPhases } from "../order_builder_state";
 import SizeSlide from "../size_slide";
 import TextInputSlide from "../text_input_slide";
+import Cart from "@/app/models/cart";
 
 export default function CuratedOrderPage(props: {
     addCartItem: React.Dispatch<React.SetStateAction<Cart>>;
@@ -24,13 +24,13 @@ export default function CuratedOrderPage(props: {
             return;
         }
         dispatch(new OrderBuilderBack());
-    }, [state]);
+    }, [state, router]);
 
     React.useEffect(() => {
         if (state.getPhase() === OrderBuilderPhases.SIZES) {
             router.push("/cart");
         }
-    }, [state]);
+    }, [state, router]);
 
 
     const prevSlideName = React.useMemo(() => {

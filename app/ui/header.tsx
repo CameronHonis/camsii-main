@@ -4,7 +4,7 @@ import NavLogo from "./nav_logo";
 
 export default function Header() {
     return (
-        <div className="absolute w-full flex items-center justify-between bg-white p-[15px] bg-opacity-70 backdrop-blur-[10px] z-[100]">
+        <div id="header" className="absolute w-full top-0 flex items-center justify-between bg-white p-[15px] bg-opacity-70 backdrop-blur-[10px] z-[100]">
             <NavLogo />
             <div className="flex items-center justify-end gap-[60px] mr-[10px]">
                 <Link href="/about" className="text-black text-[25px]">About</Link>
