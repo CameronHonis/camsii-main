@@ -21,6 +21,7 @@ const config: Config = {
                 "camsii-blue": "#005BE2",
                 "camsii-pink": "#AD5F77",
                 "camsii-dark-pink": "#6D3C4B",
+                "camsii-light-pink": "#D8A0B1"
             }
         },
     },
