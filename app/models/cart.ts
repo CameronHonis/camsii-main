@@ -30,6 +30,12 @@ export default class Cart {
         return new Cart(wordsClone, this.delivery.clone());
     }
 
+    public getCost(): number {
+        const wordsCost = this.words.map(word => word.getCost()).reduce((acc, cost) => acc + cost, 0);
+        const deliveryCost = this.delivery.getTotalCost();
+        return wordsCost + deliveryCost;
+    }
+
     public static null(): Cart {
         return new Cart([], Delivery.null());
     }
